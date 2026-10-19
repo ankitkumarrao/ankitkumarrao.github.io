@@ -5,13 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ankit Kumar Rao | Portfolio</title>
     
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Three.js for Background 3D effects -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
     <script>
@@ -48,7 +45,8 @@
             width: 100vw;
             height: 100vh;
             z-index: -1;
-            opacity: 0.6;
+            opacity: 0.75;
+            pointer-events: none;
         }
 
         /* Glassmorphism utility */
@@ -138,10 +136,8 @@
 </head>
 <body class="antialiased selection:bg-cyber selection:text-black">
 
-    <!-- Interactive Background Canvas -->
     <canvas id="bg-canvas"></canvas>
 
-    <!-- Navigation Header -->
     <nav class="fixed w-full z-50 glass border-b-0 border-t-0 border-l-0 border-r-0">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
@@ -154,7 +150,7 @@
                         <a href="#education" class="hover:text-cyber transition px-3 py-2 rounded-md text-sm font-medium text-gray-300">Education</a>
                         <a href="#creator" class="hover:text-cyber transition px-3 py-2 rounded-md text-sm font-medium text-gray-300">YouTube</a>
                         <a href="#fitness" class="hover:text-cyber transition px-3 py-2 rounded-md text-sm font-medium text-gray-300">Fitness</a>
-                        <a href="#blog" class="hover:text-cyber transition px-3 py-2 rounded-md text-sm font-medium text-gray-300">Blog & Projects</a>
+                        <a href="#blog" class="hover:text-cyber transition px-3 py-2 rounded-md text-sm font-medium text-gray-300">Blog</a>
                         <a href="#contact" class="hover:text-cyber transition px-3 py-2 rounded-md text-sm font-medium text-gray-300">Contact</a>
                     </div>
                 </div>
@@ -162,9 +158,7 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
     <main class="relative z-10 pt-20">
-        <!-- Hero Section -->
         <section id="home" class="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20">
             <div class="max-w-6xl mx-auto flex flex-col-reverse md:flex-row items-center justify-between gap-12">
                 
@@ -193,13 +187,11 @@
                 <div class="md:w-2/5 flex justify-center">
                     <img src="profile.jpeg" 
                          alt="Ankit Kumar Rao" 
-                         onerror="this.src='https://placehold.co/320x320/0a0a0a/00ff41?text=Ankit+Kumar+Rao'"
                          class="w-64 h-64 md:w-80 md:h-80 object-cover rounded-full border-2 border-cyber shadow-[0_0_15px_rgba(0,255,65,0.2)] z-10 hover:scale-105 transition duration-500">
                 </div>
             </div>
         </section>
 
-        <!-- Education Section -->
         <section id="education" class="py-20 px-4 sm:px-6 lg:px-8 bg-black/40">
             <div class="max-w-6xl mx-auto">
                 <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center"><span class="text-cyber">01.</span> Academic Background</h2>
@@ -215,7 +207,7 @@
                     </div>
 
                     <div class="glass p-8 rounded-2xl hover-cyber">
-                        <div class="text-cyber text-4xl mb-4"><i class="fa-solid fa-network-wired"></i></div>
+                        <div class="text-cyber text-4xl mb-4"><i class="fa-solid fa-chart-network"></i><i class="fa-solid fa-network-wired"></i></div>
                         <h3 class="text-2xl font-bold text-white mb-2">BS in Data Science</h3>
                         <p class="text-lg text-gray-300 font-medium mb-4">Indian Institute of Technology Madras (IIT-M)</p>
                         <p class="text-gray-400">
@@ -238,7 +230,6 @@
             </div>
         </section>
 
-        <!-- Creator Section -->
         <section id="creator" class="py-20 px-4 sm:px-6 lg:px-8">
             <div class="max-w-6xl mx-auto">
                 <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center"><span class="text-cyber">02.</span> Content Creation</h2>
@@ -259,7 +250,6 @@
             </div>
         </section>
 
-        <!-- Fitness Section -->
         <section id="fitness" class="py-20 px-4 sm:px-6 lg:px-8 bg-black/40">
             <div class="max-w-6xl mx-auto">
                 <h2 class="text-3xl md:text-4xl font-bold mb-12"><span class="text-cyber">03.</span> Beyond the Screen</h2>
@@ -280,20 +270,17 @@
                         <div class="absolute -inset-1 bg-gradient-to-tr from-cyber to-transparent rounded-2xl blur opacity-30"></div>
                         <img src="gym.jpg" 
                              alt="Fitness Back Pose" 
-                             onerror="this.src='https://placehold.co/600x400/0a0a0a/00ff41?text=Fitness+%26+Gym'"
                              class="relative rounded-2xl w-full object-cover border border-gray-800 shadow-2xl">
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Blog & Projects Section -->
         <section id="blog" class="py-20 px-4 sm:px-6 lg:px-8">
             <div class="max-w-6xl mx-auto">
                 <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center"><span class="text-cyber">04.</span> Personal Blog & Projects</h2>
                 
-                <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                    <!-- EPSIOTA Blog Card -->
+                <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
                     <div class="glass rounded-xl overflow-hidden hover-cyber flex flex-col group cursor-pointer" onclick="openBlog()">
                         <div class="overflow-hidden">
                             <img src="https://placehold.co/400x250/0a0a0a/00ff41?text=EPSIOTA+Project" alt="EPSIOTA" class="w-full h-48 object-cover group-hover:scale-110 transition duration-500">
@@ -306,25 +293,21 @@
                         </div>
                     </div>
 
-                    <!-- API-Scanner Project Card -->
                     <div class="glass rounded-xl overflow-hidden hover-cyber flex flex-col group">
                         <div class="overflow-hidden">
-                            <img src="https://placehold.co/400x250/0a0a0a/00ff41?text=API-Scanner" alt="API-Scanner" class="w-full h-48 object-cover group-hover:scale-110 transition duration-500">
+                            <img src="https://placehold.co/400x250/0a0a0a/00ff41?text=API-Scanner" alt="API-Scanner Project" class="w-full h-48 object-cover group-hover:scale-110 transition duration-500">
                         </div>
                         <div class="p-6 flex-1 flex flex-col">
                             <span class="text-xs text-cyber font-mono mb-2">Cybersecurity · Tool</span>
                             <h4 class="text-xl font-bold text-white mb-3">API-Scanner</h4>
-                            <p class="text-gray-400 text-sm mb-4 flex-1">An automated security testing tool designed for API vulnerability scanning, security assessment, and endpoint analysis to detect misconfigurations and exposure risks.</p>
-                            <a href="https://github.com/ankitkumarrao/API-Scanner" target="_blank" class="text-sm text-gray-300 group-hover:text-cyber transition flex items-center gap-2">
-                                View on GitHub <i class="fa-brands fa-github"></i> &rarr;
-                            </a>
+                            <p class="text-gray-400 text-sm mb-4 flex-1">An automated security testing tool designed to scan, audit, and analyze API endpoints for potential vulnerabilities, misconfigurations, and data exposure risks.</p>
+                            <a href="https://github.com/ankitkumarrao/API-Scanner" target="_blank" class="text-sm text-gray-300 hover:text-cyber transition">View on GitHub &rarr;</a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Contact Section -->
         <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8 bg-black/40">
             <div class="max-w-4xl mx-auto text-center">
                 <h2 class="text-3xl md:text-4xl font-bold mb-8"><span class="text-cyber">05.</span> Connect With Me</h2>
@@ -366,7 +349,6 @@
         </footer>
     </main>
 
-    <!-- Modal Blog Section -->
     <div id="blog-modal" class="hidden fixed inset-0 z-[100] overflow-y-auto">
         <div class="close-btn">
             <span class="nav-logo">Ankit.</span>
@@ -450,9 +432,142 @@
         </footer>
     </div>
 
-    <!-- Background 3D Particles Script -->
     <script>
-        // Modal functions
+        // Highly Unusual 3D Infinite Space-Time Glitch Grid & Matrix Vortex
+        window.addEventListener('load', () => {
+            const canvas = document.getElementById('bg-canvas');
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(85, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+            // 1. Infinite Space-Time Grid Planes (Top & Bottom Tunnel)
+            const gridHelperBottom = new THREE.GridHelper(100, 60, 0x00ff41, 0x003311);
+            gridHelperBottom.position.y = -6;
+            scene.add(gridHelperBottom);
+
+            const gridHelperTop = new THREE.GridHelper(100, 60, 0x00ff41, 0x002208);
+            gridHelperTop.position.y = 6;
+            scene.add(gridHelperTop);
+
+            // 2. Dynamic Glitch-Distorted Cyber Core
+            const coreGeometry = new THREE.IcosahedronGeometry(2.5, 2);
+            const coreMaterial = new THREE.MeshBasicMaterial({
+                color: 0x00ff41,
+                wireframe: true,
+                transparent: true,
+                opacity: 0.35
+            });
+            const cyberCore = new THREE.Mesh(coreGeometry, coreMaterial);
+            scene.add(cyberCore);
+
+            // Save original vertex positions for live vertex displacement (glitching)
+            const posAttr = coreGeometry.attributes.position;
+            const originalPositions = posAttr.array.slice();
+
+            // 3. Matrix Digital Warp Particles (Streaming through Space-Time)
+            const particleCount = 1200;
+            const particlePositions = new Float32Array(particleCount * 3);
+            const particleSpeeds = new Float32Array(particleCount);
+
+            for (let i = 0; i < particleCount * 3; i += 3) {
+                particlePositions[i] = (Math.random() - 0.5) * 40;
+                particlePositions[i + 1] = (Math.random() - 0.5) * 25;
+                particlePositions[i + 2] = (Math.random() - 0.5) * 60;
+                particleSpeeds[i / 3] = 0.05 + Math.random() * 0.15;
+            }
+
+            const particlesGeometry = new THREE.BufferGeometry();
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
+
+            const particlesMaterial = new THREE.PointsMaterial({
+                color: 0x00ff41,
+                size: 0.07,
+                transparent: true,
+                opacity: 0.8
+            });
+
+            const particleSystem = new THREE.Points(particlesGeometry, particlesMaterial);
+            scene.add(particleSystem);
+
+            camera.position.z = 8;
+
+            // Interactive Mouse Turbulence
+            let mouseX = 0;
+            let mouseY = 0;
+            window.addEventListener('mousemove', (e) => {
+                mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+                mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+            });
+
+            let time = 0;
+
+            // Animation Loop
+            function animate() {
+                requestAnimationFrame(animate);
+                time += 0.03;
+
+                // Infinite Grid Motion along Z-axis
+                gridHelperBottom.position.z = (time * 2) % 3.33;
+                gridHelperTop.position.z = (time * 2) % 3.33;
+
+                // Vertex-Level Glitch Distortion on Cyber Core
+                const positions = posAttr.array;
+                for (let i = 0; i < positions.length; i += 3) {
+                    const origX = originalPositions[i];
+                    const origY = originalPositions[i + 1];
+                    const origZ = originalPositions[i + 2];
+
+                    // Spatial noise perturbation for unpredictable glitch effect
+                    const noise = Math.sin(time * 4 + origX * 2 + origY * 3) * 0.18;
+                    const glitchTrigger = Math.random() > 0.96 ? (Math.random() - 0.5) * 0.6 : 0;
+
+                    positions[i] = origX + noise * (origX / 2) + glitchTrigger;
+                    positions[i + 1] = origY + noise * (origY / 2) + glitchTrigger;
+                    positions[i + 2] = origZ + noise * (origZ / 2) + glitchTrigger;
+                }
+                posAttr.needsUpdate = true;
+
+                // Rotate Cyber Core unpredictably
+                cyberCore.rotation.x += 0.005 + mouseY * 0.01;
+                cyberCore.rotation.y += 0.008 + mouseX * 0.01;
+
+                // Update Particle Stream (Matrix Warp Drive)
+                const pPositions = particleSystem.geometry.attributes.position.array;
+                for (let i = 0; i < particleCount; i++) {
+                    const idx = i * 3;
+                    pPositions[idx + 2] += particleSpeeds[i] + Math.abs(mouseX) * 0.1;
+
+                    // Loop particles back into deep space once they pass the camera
+                    if (pPositions[idx + 2] > 10) {
+                        pPositions[idx + 2] = -50;
+                        pPositions[idx] = (Math.random() - 0.5) * 40;
+                        pPositions[idx + 1] = (Math.random() - 0.5) * 25;
+                    }
+                }
+                particleSystem.geometry.attributes.position.needsUpdate = true;
+
+                // Smooth Camera Movement based on Mouse Position
+                camera.position.x += (mouseX * 1.5 - camera.position.x) * 0.05;
+                camera.position.y += (-mouseY * 1.5 - camera.position.y) * 0.05;
+                camera.lookAt(scene.position);
+
+                renderer.render(scene, camera);
+            }
+
+            animate();
+
+            // Window Resize Handler
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        });
+
+        // Modal open/close functions
         function openBlog() {
             document.getElementById('blog-modal').classList.remove('hidden');
             document.body.style.overflow = 'hidden';
@@ -462,70 +577,6 @@
             document.getElementById('blog-modal').classList.add('hidden');
             document.body.style.overflow = 'auto';
         }
-
-        // Three.js Interactive Starfield / Particle Background Scene Setup
-        window.addEventListener('load', function () {
-            const canvas = document.getElementById('bg-canvas');
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
-
-            renderer.setPixelRatio(window.devicePixelRatio);
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            camera.position.z = 30;
-
-            // Generate particles
-            const count = 700;
-            const geometry = new THREE.BufferGeometry();
-            const positions = new Float32Array(count * 3);
-
-            for (let i = 0; i < count * 3; i++) {
-                positions[i] = (Math.random() - 0.5) * 100;
-            }
-
-            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-
-            const material = new THREE.PointsMaterial({
-                color: 0x00ff41,
-                size: 0.7,
-                transparent: true,
-                opacity: 0.8
-            });
-
-            const particles = new THREE.Points(geometry, material);
-            scene.add(particles);
-
-            // Mouse interaction setup
-            let mouseX = 0;
-            let mouseY = 0;
-
-            document.addEventListener('mousemove', (e) => {
-                mouseX = (e.clientX - window.innerWidth / 2) * 0.0005;
-                mouseY = (e.clientY - window.innerHeight / 2) * 0.0005;
-            });
-
-            // Handle Resize
-            window.addEventListener('resize', () => {
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
-            });
-
-            // Animation Loop
-            function animate() {
-                requestAnimationFrame(animate);
-
-                particles.rotation.y += 0.001;
-                particles.rotation.x += 0.0005;
-
-                particles.rotation.y += (mouseX - particles.rotation.y) * 0.05;
-                particles.rotation.x += (mouseY - particles.rotation.x) * 0.05;
-
-                renderer.render(scene, camera);
-            }
-
-            animate();
-        });
     </script>
 </body>
 </html>
