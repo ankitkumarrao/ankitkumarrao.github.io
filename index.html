@@ -433,7 +433,7 @@
     </div>
 
     <script>
-        // Highly Unusual 3D Infinite Space-Time Glitch Grid & Matrix Vortex
+        // Highly Unusual 3D Infinite Space-Time Glitch Grid & Ghost Cursor Matrix
         window.addEventListener('load', () => {
             const canvas = document.getElementById('bg-canvas');
             const scene = new THREE.Scene();
@@ -452,7 +452,7 @@
             gridHelperTop.position.y = 6;
             scene.add(gridHelperTop);
 
-            // 2. Dynamic Glitch-Distorted Cyber Core
+            // 2. Movable Glitch-Distorted Cyber Core
             const coreGeometry = new THREE.IcosahedronGeometry(2.5, 2);
             const coreMaterial = new THREE.MeshBasicMaterial({
                 color: 0x00ff41,
@@ -492,14 +492,46 @@
             const particleSystem = new THREE.Points(particlesGeometry, particlesMaterial);
             scene.add(particleSystem);
 
+            // 4. Ghost Cursor Trail Particle System
+            const ghostParticleCount = 80;
+            const ghostPositions = new Float32Array(ghostParticleCount * 3);
+            const ghostSizes = new Float32Array(ghostParticleCount);
+
+            for (let i = 0; i < ghostParticleCount; i++) {
+                ghostPositions[i * 3] = 0;
+                ghostPositions[i * 3 + 1] = 0;
+                ghostPositions[i * 3 + 2] = 2;
+                ghostSizes[i] = (1 - i / ghostParticleCount) * 0.12;
+            }
+
+            const ghostGeometry = new THREE.BufferGeometry();
+            ghostGeometry.setAttribute('position', new THREE.BufferAttribute(ghostPositions, 3));
+
+            const ghostMaterial = new THREE.PointsMaterial({
+                color: 0x00ff41,
+                size: 0.1,
+                transparent: true,
+                opacity: 0.6
+            });
+
+            const ghostSystem = new THREE.Points(ghostGeometry, ghostMaterial);
+            scene.add(ghostSystem);
+
             camera.position.z = 8;
 
-            // Interactive Mouse Turbulence
+            // Mouse position tracking in normalized 3D world space
             let mouseX = 0;
             let mouseY = 0;
+            let targetGhostX = 0;
+            let targetGhostY = 0;
+
             window.addEventListener('mousemove', (e) => {
                 mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-                mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+                mouseY = -(e.clientY / window.innerHeight - 0.5) * 2;
+                
+                // Map mouse coordinates to 3D plane projection for ghost
+                targetGhostX = mouseX * 6;
+                targetGhostY = mouseY * 4;
             });
 
             let time = 0;
@@ -513,6 +545,10 @@
                 gridHelperBottom.position.z = (time * 2) % 3.33;
                 gridHelperTop.position.z = (time * 2) % 3.33;
 
+                // Move Cyber Core smoothly in response to mouse cursor
+                cyberCore.position.x += (mouseX * 2.5 - cyberCore.position.x) * 0.05;
+                cyberCore.position.y += (mouseY * 1.8 - cyberCore.position.y) * 0.05;
+
                 // Vertex-Level Glitch Distortion on Cyber Core
                 const positions = posAttr.array;
                 for (let i = 0; i < positions.length; i += 3) {
@@ -520,7 +556,6 @@
                     const origY = originalPositions[i + 1];
                     const origZ = originalPositions[i + 2];
 
-                    // Spatial noise perturbation for unpredictable glitch effect
                     const noise = Math.sin(time * 4 + origX * 2 + origY * 3) * 0.18;
                     const glitchTrigger = Math.random() > 0.96 ? (Math.random() - 0.5) * 0.6 : 0;
 
@@ -531,8 +566,27 @@
                 posAttr.needsUpdate = true;
 
                 // Rotate Cyber Core unpredictably
-                cyberCore.rotation.x += 0.005 + mouseY * 0.01;
-                cyberCore.rotation.y += 0.008 + mouseX * 0.01;
+                cyberCore.rotation.x += 0.005 + Math.abs(mouseY) * 0.005;
+                cyberCore.rotation.y += 0.008 + Math.abs(mouseX) * 0.005;
+
+                // Update Ghost Cursor Particle Trail
+                const gPositions = ghostSystem.geometry.attributes.position.array;
+                
+                // First ghost particle follows cursor smoothly
+                gPositions[0] += (targetGhostX - gPositions[0]) * 0.2;
+                gPositions[1] += (targetGhostY - gPositions[1]) * 0.2;
+                gPositions[2] = 3;
+
+                // Subsequent particles follow the previous one to create a ghostly tail
+                for (let i = ghostParticleCount - 1; i > 0; i--) {
+                    const idx = i * 3;
+                    const prevIdx = (i - 1) * 3;
+
+                    gPositions[idx] += (gPositions[prevIdx] - gPositions[idx]) * 0.35 + (Math.random() - 0.5) * 0.02;
+                    gPositions[idx + 1] += (gPositions[prevIdx + 1] - gPositions[idx + 1]) * 0.35 + (Math.random() - 0.5) * 0.02;
+                    gPositions[idx + 2] = 3 - i * 0.02;
+                }
+                ghostSystem.geometry.attributes.position.needsUpdate = true;
 
                 // Update Particle Stream (Matrix Warp Drive)
                 const pPositions = particleSystem.geometry.attributes.position.array;
@@ -540,7 +594,6 @@
                     const idx = i * 3;
                     pPositions[idx + 2] += particleSpeeds[i] + Math.abs(mouseX) * 0.1;
 
-                    // Loop particles back into deep space once they pass the camera
                     if (pPositions[idx + 2] > 10) {
                         pPositions[idx + 2] = -50;
                         pPositions[idx] = (Math.random() - 0.5) * 40;
@@ -549,9 +602,9 @@
                 }
                 particleSystem.geometry.attributes.position.needsUpdate = true;
 
-                // Smooth Camera Movement based on Mouse Position
-                camera.position.x += (mouseX * 1.5 - camera.position.x) * 0.05;
-                camera.position.y += (-mouseY * 1.5 - camera.position.y) * 0.05;
+                // Camera subtle floating
+                camera.position.x += (mouseX * 0.8 - camera.position.x) * 0.05;
+                camera.position.y += (mouseY * 0.8 - camera.position.y) * 0.05;
                 camera.lookAt(scene.position);
 
                 renderer.render(scene, camera);
