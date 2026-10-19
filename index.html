@@ -728,3 +728,52 @@
     </script>
 </body>
 </html>
+// Modal open/close functions
+        function openBlog() {
+            document.getElementById('blog-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeBlog() {
+            document.getElementById('blog-modal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+    </script>
+
+    <!-- JSON-LD Structured Data for AI & Search Engines -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Ankit Kumar Rao",
+      "jobTitle": "Software Developer & Data Science Student",
+      "alumniOf": [
+        {
+          "@type": "EducationalOrganization",
+          "name": "Vellore Institute of Technology (VIT)"
+        },
+        {
+          "@type": "EducationalOrganization",
+          "name": "Indian Institute of Technology Madras (IIT Madras)"
+        }
+      ],
+      "knowsAbout": [
+        "Computer Science",
+        "Data Science",
+        "Cybersecurity",
+        "Web Development",
+        "Python",
+        "React",
+        "Flask"
+      ],
+      "sameAs": [
+        "https://github.com/ankitkumarrao",
+        "https://www.linkedin.com/in/ankit-kumar-rao-30b557399",
+        "https://www.youtube.com/@IAnkitkumarrao",
+        "https://x.com/ftankitkumarrao",
+        "https://instagram.com/iankitkumarrao"
+      ]
+    }
+    </script>
+</body>
+</html>
