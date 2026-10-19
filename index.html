@@ -49,13 +49,57 @@
             pointer-events: none;
         }
 
-        /* Glassmorphism utility */
+        /* Glassmorphism utility with Interactive HUD Enhancements */
         .glass {
+            position: relative;
             background: rgba(15, 23, 42, 0.6);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(0, 255, 65, 0.2);
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            transition: transform 0.15s ease-out, border-color 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+        }
+
+        /* Dynamic Radial Mouse Spotlight Glow */
+        .glass::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0, 255, 65, 0.15), transparent 40%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .glass:hover::before {
+            opacity: 1;
+        }
+
+        /* Cyberpunk HUD Corner Brackets */
+        .hud-bracket {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-color: #00ff41;
+            border-style: solid;
+            opacity: 0.3;
+            transition: all 0.3s ease;
+            pointer-events: none;
+            z-index: 2;
+        }
+        .hud-tl { top: 8px; left: 8px; border-width: 2px 0 0 2px; }
+        .hud-tr { top: 8px; right: 8px; border-width: 2px 2px 0 0; }
+        .hud-bl { bottom: 8px; left: 8px; border-width: 0 0 2px 2px; }
+        .hud-br { bottom: 8px; right: 8px; border-width: 0 2px 2px 0; }
+
+        .glass:hover .hud-bracket {
+            opacity: 1;
+            width: 18px;
+            height: 18px;
         }
 
         .cyber-text {
@@ -63,10 +107,8 @@
         }
 
         .hover-cyber:hover {
-            box-shadow: 0 0 15px rgba(0, 255, 65, 0.5);
+            box-shadow: 0 0 25px rgba(0, 255, 65, 0.3), inset 0 0 15px rgba(0, 255, 65, 0.1);
             border-color: #00ff41;
-            transform: translateY(-2px);
-            transition: all 0.3s ease;
         }
         
         /* Custom scrollbar */
@@ -197,31 +239,37 @@
                 <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center"><span class="text-cyber">01.</span> Academic Background</h2>
                 
                 <div class="grid md:grid-cols-2 gap-8">
-                    <div class="glass p-8 rounded-2xl hover-cyber">
-                        <div class="text-cyber text-4xl mb-4"><i class="fa-solid fa-code"></i></div>
-                        <h3 class="text-2xl font-bold text-white mb-2">B.Tech in CSE</h3>
+                    <div class="glass p-8 rounded-2xl hover-cyber group cursor-pointer" data-tilt>
+                        <div class="hud-bracket hud-tl"></div><div class="hud-bracket hud-tr"></div>
+                        <div class="hud-bracket hud-bl"></div><div class="hud-bracket hud-br"></div>
+                        <div class="text-cyber text-4xl mb-4 group-hover:scale-110 transition duration-300"><i class="fa-solid fa-code"></i></div>
+                        <h3 class="text-2xl font-bold text-white mb-2 decrypt-text" data-value="B.Tech in CSE">B.Tech in CSE</h3>
                         <p class="text-lg text-gray-300 font-medium mb-4">Vellore Institute of Technology (VIT)</p>
-                        <p class="text-gray-400">
+                        <p class="text-gray-400 relative z-10">
                             Focusing on core Computer Science principles, algorithms, software development, and modern engineering practices.
                         </p>
                     </div>
 
-                    <div class="glass p-8 rounded-2xl hover-cyber">
-                        <div class="text-cyber text-4xl mb-4"><i class="fa-solid fa-chart-network"></i><i class="fa-solid fa-network-wired"></i></div>
-                        <h3 class="text-2xl font-bold text-white mb-2">BS in Data Science</h3>
+                    <div class="glass p-8 rounded-2xl hover-cyber group cursor-pointer" data-tilt>
+                        <div class="hud-bracket hud-tl"></div><div class="hud-bracket hud-tr"></div>
+                        <div class="hud-bracket hud-bl"></div><div class="hud-bracket hud-br"></div>
+                        <div class="text-cyber text-4xl mb-4 group-hover:scale-110 transition duration-300"><i class="fa-solid fa-chart-network"></i><i class="fa-solid fa-network-wired"></i></div>
+                        <h3 class="text-2xl font-bold text-white mb-2 decrypt-text" data-value="BS in Data Science">BS in Data Science</h3>
                         <p class="text-lg text-gray-300 font-medium mb-4">Indian Institute of Technology Madras (IIT-M)</p>
-                        <p class="text-gray-400">
+                        <p class="text-gray-400 relative z-10">
                             Diving deep into statistics, machine learning, data processing, and analytical problem-solving at India's premier institute.
                         </p>
                     </div>
                 </div>
 
-                <div class="mt-12 glass p-8 rounded-2xl border-l-4 border-l-cyber hover-cyber">
+                <div class="mt-12 glass p-8 rounded-2xl border-l-4 border-l-cyber hover-cyber group cursor-pointer" data-tilt>
+                    <div class="hud-bracket hud-tl"></div><div class="hud-bracket hud-tr"></div>
+                    <div class="hud-bracket hud-bl"></div><div class="hud-bracket hud-br"></div>
                     <div class="flex items-start gap-6">
-                        <div class="text-cyber text-5xl mt-1"><i class="fa-solid fa-shield-halved"></i></div>
+                        <div class="text-cyber text-5xl mt-1 group-hover:rotate-12 transition duration-300"><i class="fa-solid fa-shield-halved"></i></div>
                         <div>
-                            <h3 class="text-2xl font-bold text-white mb-2">Core Interest: Cybersecurity</h3>
-                            <p class="text-gray-400">
+                            <h3 class="text-2xl font-bold text-white mb-2 decrypt-text" data-value="Core Interest: Cybersecurity">Core Interest: Cybersecurity</h3>
+                            <p class="text-gray-400 relative z-10">
                                 Beyond my formal degrees, I have a profound interest in Cybersecurity. I am dedicated to learning about ethical hacking, network security, and cryptography to protect data in an increasingly connected world.
                             </p>
                         </div>
@@ -235,15 +283,17 @@
                 <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center"><span class="text-cyber">02.</span> Content Creation</h2>
                 
                 <div class="max-w-2xl mx-auto">
-                    <div class="glass p-8 rounded-2xl hover-cyber flex items-start gap-6 relative overflow-hidden group">
+                    <div class="glass p-8 rounded-2xl hover-cyber flex items-start gap-6 relative overflow-hidden group cursor-pointer" data-tilt>
+                        <div class="hud-bracket hud-tl"></div><div class="hud-bracket hud-tr"></div>
+                        <div class="hud-bracket hud-bl"></div><div class="hud-bracket hud-br"></div>
                         <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition text-6xl text-cyber"><i class="fa-brands fa-youtube"></i></div>
                         <div class="text-red-500 text-4xl mt-1 z-10"><i class="fa-brands fa-youtube"></i></div>
                         <div class="z-10">
-                            <h3 class="text-2xl font-bold text-white mb-2">Ankit Kumar Rao</h3>
-                            <p class="text-gray-400 mb-4">
+                            <h3 class="text-2xl font-bold text-white mb-2 decrypt-text" data-value="Ankit Kumar Rao">Ankit Kumar Rao</h3>
+                            <p class="text-gray-400 mb-4 relative z-10">
                                 Breaking down complex tech concepts, reviewing the latest gadgets, and sharing insights on programming and cybersecurity.
                             </p>
-                            <a href="https://www.youtube.com/@IAnkitkumarrao" target="_blank" class="text-cyber hover:underline text-sm font-mono">Watch Channel &rarr;</a>
+                            <a href="https://www.youtube.com/@IAnkitkumarrao" target="_blank" class="text-cyber hover:underline text-sm font-mono relative z-20">Watch Channel &rarr;</a>
                         </div>
                     </div>
                 </div>
@@ -281,27 +331,25 @@
                 <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center"><span class="text-cyber">04.</span> Personal Blog & Projects</h2>
                 
                 <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-                    <div class="glass rounded-xl overflow-hidden hover-cyber flex flex-col group cursor-pointer" onclick="openBlog()">
-                        <div class="overflow-hidden">
-                            <img src="https://placehold.co/400x250/0a0a0a/00ff41?text=EPSIOTA+Project" alt="EPSIOTA" class="w-full h-48 object-cover group-hover:scale-110 transition duration-500">
-                        </div>
+                    <div class="glass rounded-xl overflow-hidden hover-cyber flex flex-col group cursor-pointer" onclick="openBlog()" data-tilt>
+                        <div class="hud-bracket hud-tl"></div><div class="hud-bracket hud-tr"></div>
+                        <div class="hud-bracket hud-bl"></div><div class="hud-bracket hud-br"></div>
                         <div class="p-6 flex-1 flex flex-col">
                             <span class="text-xs text-cyber font-mono mb-2">Startup · AI</span>
-                            <h4 class="text-xl font-bold text-white mb-3">Why I'm Building EPSIOTA</h4>
-                            <p class="text-gray-400 text-sm mb-4 flex-1">A bet that AI can fundamentally transform how construction works in India, starting from the ground up.</p>
+                            <h4 class="text-xl font-bold text-white mb-3 decrypt-text" data-value="Why I'm Building EPSIOTA">Why I'm Building EPSIOTA</h4>
+                            <p class="text-gray-400 text-sm mb-4 flex-1 relative z-10">A bet that AI can fundamentally transform how construction works in India, starting from the ground up.</p>
                             <span class="text-sm text-gray-300 group-hover:text-cyber transition">Read Article &rarr;</span>
                         </div>
                     </div>
 
-                    <div class="glass rounded-xl overflow-hidden hover-cyber flex flex-col group">
-                        <div class="overflow-hidden">
-                            <img src="https://placehold.co/400x250/0a0a0a/00ff41?text=API-Scanner" alt="API-Scanner Project" class="w-full h-48 object-cover group-hover:scale-110 transition duration-500">
-                        </div>
+                    <div class="glass rounded-xl overflow-hidden hover-cyber flex flex-col group cursor-pointer" data-tilt>
+                        <div class="hud-bracket hud-tl"></div><div class="hud-bracket hud-tr"></div>
+                        <div class="hud-bracket hud-bl"></div><div class="hud-bracket hud-br"></div>
                         <div class="p-6 flex-1 flex flex-col">
                             <span class="text-xs text-cyber font-mono mb-2">Cybersecurity · Tool</span>
-                            <h4 class="text-xl font-bold text-white mb-3">API-Scanner</h4>
-                            <p class="text-gray-400 text-sm mb-4 flex-1">An automated security testing tool designed to scan, audit, and analyze API endpoints for potential vulnerabilities, misconfigurations, and data exposure risks.</p>
-                            <a href="https://github.com/ankitkumarrao/API-Scanner" target="_blank" class="text-sm text-gray-300 hover:text-cyber transition">View on GitHub &rarr;</a>
+                            <h4 class="text-xl font-bold text-white mb-3 decrypt-text" data-value="API-Scanner">API-Scanner</h4>
+                            <p class="text-gray-400 text-sm mb-4 flex-1 relative z-10">An automated security testing tool designed to scan, audit, and analyze API endpoints for potential vulnerabilities, misconfigurations, and data exposure risks.</p>
+                            <a href="https://github.com/ankitkumarrao/API-Scanner" target="_blank" class="text-sm text-gray-300 hover:text-cyber transition relative z-20">View on GitHub &rarr;</a>
                         </div>
                     </div>
                 </div>
@@ -316,14 +364,18 @@
                 </p>
 
                 <div class="grid sm:grid-cols-2 gap-6 mb-12">
-                    <a href="mailto:ankitkumarrao99310@gmail.com" class="glass p-6 rounded-xl flex items-center justify-center gap-4 hover-cyber group">
+                    <a href="mailto:ankitkumarrao99310@gmail.com" class="glass p-6 rounded-xl flex items-center justify-center gap-4 hover-cyber group" data-tilt>
+                        <div class="hud-bracket hud-tl"></div><div class="hud-bracket hud-tr"></div>
+                        <div class="hud-bracket hud-bl"></div><div class="hud-bracket hud-br"></div>
                         <i class="fa-solid fa-envelope text-2xl text-cyber group-hover:text-white transition"></i>
-                        <span class="text-gray-300 group-hover:text-cyber transition">ankitkumarrao99310@gmail.com</span>
+                        <span class="text-gray-300 group-hover:text-cyber transition relative z-10">ankitkumarrao99310@gmail.com</span>
                     </a>
                     
-                    <a href="tel:+919931022672" class="glass p-6 rounded-xl flex items-center justify-center gap-4 hover-cyber group">
+                    <a href="tel:+919931022672" class="glass p-6 rounded-xl flex items-center justify-center gap-4 hover-cyber group" data-tilt>
+                        <div class="hud-bracket hud-tl"></div><div class="hud-bracket hud-tr"></div>
+                        <div class="hud-bracket hud-bl"></div><div class="hud-bracket hud-br"></div>
                         <i class="fa-solid fa-phone text-2xl text-cyber group-hover:text-white transition"></i>
-                        <span class="text-gray-300 group-hover:text-cyber transition">+91 99310 22672</span>
+                        <span class="text-gray-300 group-hover:text-cyber transition relative z-10">+91 99310 22672</span>
                     </a>
                 </div>
 
@@ -495,13 +547,11 @@
             // 4. Ghost Cursor Trail Particle System
             const ghostParticleCount = 80;
             const ghostPositions = new Float32Array(ghostParticleCount * 3);
-            const ghostSizes = new Float32Array(ghostParticleCount);
 
             for (let i = 0; i < ghostParticleCount; i++) {
                 ghostPositions[i * 3] = 0;
                 ghostPositions[i * 3 + 1] = 0;
                 ghostPositions[i * 3 + 2] = 2;
-                ghostSizes[i] = (1 - i / ghostParticleCount) * 0.12;
             }
 
             const ghostGeometry = new THREE.BufferGeometry();
@@ -519,7 +569,6 @@
 
             camera.position.z = 8;
 
-            // Mouse position tracking in normalized 3D world space
             let mouseX = 0;
             let mouseY = 0;
             let targetGhostX = 0;
@@ -529,7 +578,6 @@
                 mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
                 mouseY = -(e.clientY / window.innerHeight - 0.5) * 2;
                 
-                // Map mouse coordinates to 3D plane projection for ghost
                 targetGhostX = mouseX * 6;
                 targetGhostY = mouseY * 4;
             });
@@ -571,13 +619,10 @@
 
                 // Update Ghost Cursor Particle Trail
                 const gPositions = ghostSystem.geometry.attributes.position.array;
-                
-                // First ghost particle follows cursor smoothly
                 gPositions[0] += (targetGhostX - gPositions[0]) * 0.2;
                 gPositions[1] += (targetGhostY - gPositions[1]) * 0.2;
                 gPositions[2] = 3;
 
-                // Subsequent particles follow the previous one to create a ghostly tail
                 for (let i = ghostParticleCount - 1; i > 0; i--) {
                     const idx = i * 3;
                     const prevIdx = (i - 1) * 3;
@@ -588,7 +633,7 @@
                 }
                 ghostSystem.geometry.attributes.position.needsUpdate = true;
 
-                // Update Particle Stream (Matrix Warp Drive)
+                // Update Particle Stream
                 const pPositions = particleSystem.geometry.attributes.position.array;
                 for (let i = 0; i < particleCount; i++) {
                     const idx = i * 3;
@@ -617,6 +662,56 @@
                 camera.aspect = window.innerWidth / window.innerHeight;
                 camera.updateProjectionMatrix();
                 renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        });
+
+        // --- Interactive Card 3D Tilt & Spotlight Glow Engine ---
+        const tiltCards = document.querySelectorAll('[data-tilt]');
+        tiltCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = ((y - centerY) / centerY) * -10;
+                const rotateY = ((x - centerX) / centerX) * 10;
+
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+            });
+        });
+
+        // --- Hacker Matrix Decrypt Text Effect Engine ---
+        const matrixChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*";
+        document.querySelectorAll('.decrypt-text').forEach(element => {
+            element.addEventListener('mouseenter', event => {
+                let iteration = 0;
+                clearInterval(event.target.interval);
+
+                event.target.interval = setInterval(() => {
+                    event.target.innerText = event.target.dataset.value
+                        .split("")
+                        .map((char, index) => {
+                            if(index < iteration) {
+                                return event.target.dataset.value[index];
+                            }
+                            return matrixChars[Math.floor(Math.random() * matrixChars.length)];
+                        })
+                        .join("");
+
+                    if(iteration >= event.target.dataset.value.length){
+                        clearInterval(event.target.interval);
+                    }
+                    iteration += 1 / 2;
+                }, 30);
             });
         });
 
